@@ -14,7 +14,7 @@ object BasprogData {
         Basprog(
              "2",
              "Javascript",
-             "JavaScript is a programming language commonly used for web development. It enables developers to create dynamic interactions on websites, changing page content in real-time, and providing interactive experiences to users.",
+             "JavaScript adalah bahasa pemrograman yang biasa digunakan untuk pengembangan web. JavaScript memungkinkan pengembang untuk membuat interaksi dinamis di situs web, mengubah konten halaman secara real-time, dan memberikan pengalaman interaktif kepada pengguna.",
              "66,4",
              "Brendan Eich",
             "1995",
