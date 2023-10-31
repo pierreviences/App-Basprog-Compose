@@ -71,7 +71,10 @@ fun BasprogApp(
             ) {
                 val id = it.arguments?.getString("id") ?: ""
                 DetailScreen(
-                    id = id
+                    id = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
                 )
             }
         }

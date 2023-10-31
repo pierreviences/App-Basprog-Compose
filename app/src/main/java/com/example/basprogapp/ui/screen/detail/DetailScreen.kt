@@ -1,7 +1,9 @@
 package com.example.basprogapp.ui.screen.detail
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -44,6 +47,7 @@ import com.example.basprogapp.ui.ViewModelFactory
 import com.example.basprogapp.ui.common.UiState
 import com.example.basprogapp.ui.components.BasprogCard
 import com.example.basprogapp.ui.theme.BasprogAppTheme
+import com.example.basprogapp.ui.theme.Primary40
 import com.example.basprogapp.ui.theme.Primary80
 
 @Composable
@@ -51,7 +55,8 @@ fun DetailScreen(
     id: String,
     viewModel: DetailViewModel = viewModel(
         factory = ViewModelFactory(Injection.provideRepository())
-    )
+    ),
+    navigateBack: () -> Unit
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { state ->
         when (state) {
@@ -68,6 +73,7 @@ fun DetailScreen(
                     years = data.creator,
                     photoUrl =  data.photoUrl,
                     isFavorite = data.isFavorite,
+                    onBackClick = navigateBack,
                     onFavClick = {
                         viewModel.addToFavorite(data.id, !data.isFavorite)
                     }
@@ -89,9 +95,11 @@ fun DetailContent(
     years: String,
     photoUrl: String,
     isFavorite: Boolean,
+    onBackClick: () -> Unit,
     onFavClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -100,18 +108,36 @@ fun DetailContent(
         Row(
             modifier
                 .fillMaxWidth()
+                .background(Primary80)
                 .padding(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
+        ){
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "back",
+                modifier = Modifier
+                    .clickable { onBackClick() },
+                tint = Color.White
+            )
+            Text(
+                text = "Detail",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
+        Row(
+            modifier
+                .fillMaxWidth()
+                .padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             AsyncImage(
                 model = photoUrl,
                 contentDescription = name,
                 modifier = Modifier
-                    .size(90.dp)
-                    .fillMaxHeight()
-                    .padding(
-                        top = 5.dp
-                    ),
+                    .size(100.dp)
+                    .fillMaxHeight(),
                 contentScale = ContentScale.Crop
             )
             Column {
@@ -151,7 +177,7 @@ fun DetailContent(
                     )
 
                     Text(
-                        text = "diciptkan oleh ${creator}",
+                        text = "diciptakan oleh ${creator}",
                         color = Color.Black,
                         fontSize = 12.sp,
                     )
@@ -178,7 +204,7 @@ fun DetailContent(
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = modifier
-                .padding(16.dp)
+                .padding(10.dp)
                 .fillMaxWidth()
         ) {
             Text(
@@ -211,7 +237,7 @@ fun DetailContent(
             text = description,
             color = Color.Black,
             fontSize = 12.sp,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 10.dp)
         )
     }
 }
@@ -228,6 +254,7 @@ fun DetailScreenPreview(){
             years = "2022",
             photoUrl = "your_photo_url_here",
             isFavorite = false,
+            onBackClick = {},
             onFavClick = {}
         )
     }
