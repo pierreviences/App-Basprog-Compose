@@ -41,7 +41,7 @@ fun SearchBar(
         },
         shape = MaterialTheme.shapes.large,
         modifier = modifier
-            .padding(16.dp)
+            .padding(10.dp)
             .fillMaxWidth()
             .heightIn(min = 48.dp)
     ) {

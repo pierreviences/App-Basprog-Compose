@@ -28,6 +28,22 @@ class BasprogRepository {
             it.id == id
         }
     }
+    fun getFavoriteBasprog(): Flow<List<Basprog>> {
+        return flowOf(listBasprog.filter { it.isFavorite })
+    }
+
+    fun updateBasprog(id: String, newValue: Boolean): Flow<Boolean> {
+        val index = listBasprog.indexOfFirst { it.id == id }
+        val result = if (index >= 0) {
+            val agent = listBasprog[index]
+            listBasprog[index] = agent.copy(isFavorite = newValue)
+            true
+        } else {
+            false
+        }
+        return flowOf(result)
+    }
+
 
     companion object {
         @Volatile

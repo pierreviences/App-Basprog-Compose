@@ -67,14 +67,11 @@ fun BasprogApp(
             }
             composable(
                 route = Screen.DetailBasprog.route,
-                arguments = listOf(navArgument("id") { type = NavType.LongType }),
+                arguments = listOf(navArgument("id") { type = NavType.StringType }),
             ) {
                 val id = it.arguments?.getString("id") ?: ""
                 DetailScreen(
-                    id = id,
-                    navigateBack = {
-                        navController.navigateUp()
-                    }
+                    id = id
                 )
             }
         }
