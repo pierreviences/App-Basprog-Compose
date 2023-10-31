@@ -9,4 +9,11 @@
     <string name="name">Muhamad Yazid Imani</string>
     <string name="email">imaniyazid@gmail.com</string>
     <string name="place">Bogor, Indonesia</string>
+    <string name="back">back</string>
+    <string name="detail">Detail</string>
+    <string name="favorite">Favorite</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="creator">diciptakan oleh</string>
+    <string name="years">dirilis pada tahun</string>
+    <string name="favorite_developer">developer stack overflow</string>
 </resources>
