@@ -60,7 +60,9 @@ fun BasprogApp(
                 })
             }
             composable(Screen.Favorite.route) {
-                FavoriteScreen()
+                FavoriteScreen(navigateToDetail = {
+                    navController.navigate(Screen.DetailBasprog.createRoute(it))
+                })
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
