@@ -22,7 +22,7 @@ class DetailViewModel(private val repository: BasprogRepository) : ViewModel() {
 
     fun addToFavorite(id: String, isFavorite:Boolean) =
         viewModelScope.launch {
-            repository.updateBasprog(id, isFavorite)
+            repository.updateFavoriteBasprog(id, isFavorite)
                 .collect{
                     if (it) getBasprogById(id)
                 }

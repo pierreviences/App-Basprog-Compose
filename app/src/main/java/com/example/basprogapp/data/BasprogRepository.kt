@@ -16,34 +16,20 @@ class BasprogRepository {
         }
     }
 
-    fun getBasprog(): Flow<List<Basprog>> {
-        return flowOf(listBasprog)
-    }
-    fun searchBasprog(query: String): Flow<List<Basprog>> {
-        return flowOf(listBasprog.filter { it.name.contains(query, ignoreCase = true) })
-    }
+    fun getBasprog(): Flow<List<Basprog>> = flowOf(listBasprog)
 
-    fun getBasprogById(id: String): Basprog {
-        return listBasprog.first {
-            it.id == id
-        }
-    }
-    fun getFavoriteBasprog(): Flow<List<Basprog>> {
-        return flowOf(listBasprog.filter { it.isFavorite })
-    }
+    fun searchBasprog(query: String): Flow<List<Basprog>> =
+        flowOf(listBasprog.filter { it.name.contains(query, ignoreCase = true) })
 
-    fun updateBasprog(id: String, newValue: Boolean): Flow<Boolean> {
-        val index = listBasprog.indexOfFirst { it.id == id }
-        val result = if (index >= 0) {
-            val agent = listBasprog[index]
-            listBasprog[index] = agent.copy(isFavorite = newValue)
+    fun getBasprogById(id: String): Basprog = listBasprog.first { it.id == id }
+
+    fun getFavoriteBasprog(): Flow<List<Basprog>> = flowOf(listBasprog.filter { it.isFavorite })
+
+    fun updateFavoriteBasprog(id: String, newValue: Boolean): Flow<Boolean> =
+        flowOf(listBasprog.indexOfFirst { it.id == id }.takeIf { it >= 0 }?.run {
+            listBasprog[this] = listBasprog[this].copy(isFavorite = newValue)
             true
-        } else {
-            false
-        }
-        return flowOf(result)
-    }
-
+        } ?: false)
 
     companion object {
         @Volatile
@@ -51,7 +37,7 @@ class BasprogRepository {
 
         fun getInstance(): BasprogRepository =
             instance ?: synchronized(this) {
-                BasprogRepository().apply {
+                instance ?: BasprogRepository().apply {
                     instance = this
                 }
             }
