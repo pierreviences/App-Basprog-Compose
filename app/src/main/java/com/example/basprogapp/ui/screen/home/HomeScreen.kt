@@ -27,7 +27,7 @@ import com.example.basprogapp.ui.ViewModelFactory
 import com.example.basprogapp.di.Injection
 import com.example.basprogapp.model.Basprog
 import com.example.basprogapp.ui.common.UiState
-import com.example.basprogapp.ui.components.BasprogCard
+import com.example.basprogapp.ui.components.card.BasprogCard
 import com.example.basprogapp.ui.components.SearchBar
 
 @OptIn(ExperimentalFoundationApi::class)

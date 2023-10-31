@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -26,10 +24,7 @@ import com.example.basprogapp.di.Injection
 import com.example.basprogapp.model.Basprog
 import com.example.basprogapp.ui.ViewModelFactory
 import com.example.basprogapp.ui.common.UiState
-import com.example.basprogapp.ui.components.BasprogCard
-import com.example.basprogapp.ui.components.SearchBar
-import com.example.basprogapp.ui.screen.home.HomeContent
-import com.example.basprogapp.ui.screen.home.HomeViewModel
+import com.example.basprogapp.ui.components.card.BasprogCard
 
 @Composable
 fun FavoriteScreen(

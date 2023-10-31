@@ -1,4 +1,4 @@
-package com.example.basprogapp.ui.components
+package com.example.basprogapp.ui.components.card
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -50,33 +50,8 @@ fun BasprogCard(
             modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(5.dp)
         ) {
-            AsyncImage(
-                model = photoUrl,
-                contentDescription = name,
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(8.dp)
-                    .fillMaxHeight(),
-                contentScale = ContentScale.FillWidth
-            )
-            Column{
-                Text(
-                    text = "${indexInt}. ${name}",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(top = 8.dp, start = 12.dp)
-                )
-                Text(
-                    text = description,
-                    color = Color.Black,
-                    fontSize = 12.sp,
-                    lineHeight = 18.sp,
-                    maxLines = 3,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp)
-                )
-
-            }
+            CardImage(photoUrl = photoUrl, name = name)
+            CardText(index = indexInt, name = name, description = description)
         }
     }
 }
