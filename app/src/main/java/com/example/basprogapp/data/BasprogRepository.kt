@@ -23,4 +23,22 @@ class BasprogRepository {
         return flowOf(listBasprog.filter { it.name.contains(query, ignoreCase = true) })
     }
 
+    fun getBasprogById(id: String): Basprog {
+        return listBasprog.first {
+            it.id == id
+        }
+    }
+
+    companion object {
+        @Volatile
+        private var instance: BasprogRepository? = null
+
+        fun getInstance(): BasprogRepository =
+            instance ?: synchronized(this) {
+                BasprogRepository().apply {
+                    instance = this
+                }
+            }
+    }
+
 }

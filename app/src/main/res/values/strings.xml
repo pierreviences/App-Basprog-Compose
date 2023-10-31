@@ -4,4 +4,9 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_profile">Profile</string>
     <string name="search_basprog">Cari bahasa pemrograman</string>
+    <string name="data_not_avaible">Data not available</string>
+    <string name="img_profile">Image Profile</string>
+    <string name="name">Muhamad Yazid Imani</string>
+    <string name="email">imaniyazid@gmail.com</string>
+    <string name="place">Bogor, Indonesia</string>
 </resources>

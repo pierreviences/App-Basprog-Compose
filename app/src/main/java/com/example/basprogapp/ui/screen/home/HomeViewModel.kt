@@ -19,7 +19,17 @@ class HomeViewModel(private val repository: BasprogRepository) : ViewModel() {
 
     private val _query = mutableStateOf("")
     val query: State<String> get() = _query
-
+    fun getBasprog() {
+        viewModelScope.launch {
+            repository.getBasprog()
+                .catch {
+                    _uiState.value = UiState.Error(it.message.toString())
+                }
+                .collect {
+                    _uiState.value = UiState.Success(it)
+                }
+        }
+    }
     fun searchBasprog(name: String) {
         _query.value = name
         viewModelScope.launch {

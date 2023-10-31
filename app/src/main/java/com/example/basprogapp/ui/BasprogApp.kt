@@ -17,13 +17,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.basprogapp.R
 import com.example.basprogapp.ui.navigation.NavigationItem
 import com.example.basprogapp.ui.navigation.Screen
+import com.example.basprogapp.ui.screen.detail.DetailScreen
 import com.example.basprogapp.ui.screen.favorite.FavoriteScreen
 import com.example.basprogapp.ui.screen.home.HomeScreen
 import com.example.basprogapp.ui.screen.profile.ProfileScreen
@@ -35,9 +38,14 @@ fun BasprogApp(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
 ) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     Scaffold(
         bottomBar = {
-            BottomBar(navController)
+            if (currentRoute != Screen.DetailBasprog.route) {
+                BottomBar(navController = navController)
+            }
         },
         modifier = modifier
     ) { innerPadding ->
@@ -47,13 +55,27 @@ fun BasprogApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navigateToDetail = {
+                    navController.navigate(Screen.DetailBasprog.createRoute(it))
+                })
             }
             composable(Screen.Favorite.route) {
                 FavoriteScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
+            }
+            composable(
+                route = Screen.DetailBasprog.route,
+                arguments = listOf(navArgument("id") { type = NavType.LongType }),
+            ) {
+                val id = it.arguments?.getString("id") ?: ""
+                DetailScreen(
+                    id = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    }
+                )
             }
         }
     }
