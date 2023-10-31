@@ -14,15 +14,9 @@ class FavoriteViewModel(private val repository: BasprogRepository) : ViewModel()
     private val _uiState: MutableStateFlow<UiState<List<Basprog>>> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<List<Basprog>>> get() = _uiState
 
-    fun getFavoriteBasprog() {
-        viewModelScope.launch {
-            repository.getFavoriteBasprog()
-                .catch {
-                    _uiState.value = UiState.Error(it.message.toString())
-                }
-                .collect {
-                    _uiState.value = UiState.Success(it)
-                }
-        }
+    fun getFavoriteBasprog() = viewModelScope.launch {
+        repository.getFavoriteBasprog()
+            .catch { _uiState.value = UiState.Error(it.message.toString()) }
+            .collect { _uiState.value = UiState.Success(it) }
     }
 }

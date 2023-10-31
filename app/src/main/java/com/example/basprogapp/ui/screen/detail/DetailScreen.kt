@@ -39,6 +39,7 @@ import coil.compose.AsyncImage
 import com.example.basprogapp.di.Injection
 import com.example.basprogapp.ui.ViewModelFactory
 import com.example.basprogapp.ui.common.UiState
+import com.example.basprogapp.ui.components.InfoDetail
 import com.example.basprogapp.ui.theme.BasprogAppTheme
 import com.example.basprogapp.ui.theme.Primary80
 
@@ -142,54 +143,9 @@ fun DetailContent(
                             bottom = 10.dp
                         )
                 )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = null,
-                        tint = Primary80
-                    )
-
-                    Text(
-                        text = "${like} % developer stack overflow",
-                        color = Color.Black,
-                        fontSize = 12.sp,
-                    )
-                }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.AccountCircle,
-                        contentDescription = null,
-                        tint = Primary80
-                    )
-
-                    Text(
-                        text = "diciptakan oleh ${creator}",
-                        color = Color.Black,
-                        fontSize = 12.sp,
-                    )
-                }
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = null,
-                        tint = Primary80
-                    )
-
-                    Text(
-                        text = "dirilis pada tahun ${years}",
-                        color = Color.Black,
-                        fontSize = 12.sp,
-                    )
-                }
+                InfoDetail(icon = Icons.Default.Favorite, text = "${like} % developer stack overflow")
+                InfoDetail(icon = Icons.Default.AccountCircle, text =   "diciptakan oleh ${creator}")
+                InfoDetail(icon = Icons.Default.DateRange, text =  "dirilis pada tahun ${years}")
 
             }
         }

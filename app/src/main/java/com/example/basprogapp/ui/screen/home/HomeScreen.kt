@@ -30,7 +30,6 @@ import com.example.basprogapp.ui.common.UiState
 import com.example.basprogapp.ui.components.card.BasprogCard
 import com.example.basprogapp.ui.components.SearchBar
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,

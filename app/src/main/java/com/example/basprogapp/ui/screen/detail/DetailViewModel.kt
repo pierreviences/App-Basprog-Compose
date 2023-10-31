@@ -12,14 +12,12 @@ import kotlinx.coroutines.launch
 class DetailViewModel(private val repository: BasprogRepository) : ViewModel() {
     private val _uiState: MutableStateFlow<UiState<Basprog>> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState<Basprog>> get() = _uiState
-
     fun getBasprogById(id: String) {
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             _uiState.value = UiState.Success(repository.getBasprogById(id))
         }
     }
-
     fun addToFavorite(id: String, isFavorite:Boolean) =
         viewModelScope.launch {
             repository.updateFavoriteBasprog(id, isFavorite)
@@ -27,5 +25,4 @@ class DetailViewModel(private val repository: BasprogRepository) : ViewModel() {
                     if (it) getBasprogById(id)
                 }
         }
-
 }
